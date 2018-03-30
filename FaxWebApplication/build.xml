@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project name="fax" basedir="." default="build">
+    <property name="src.dir" value="src"/>
+    <property name="web.dir" value="war"/>
+    <property name="build.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="name" value="fax"/>
+
+    <!-- Holds all classpath information in the build and lib folders -->
+    <path id="master-classpath">
+        <fileset dir="${web.dir}/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+    </path>
+
+    <!-- Make the build directory, supply the src and classpath, then compile
+         all Java files into the build directory -->
+    <target name="build" description="Compile source tree java files">
+        <mkdir dir="${build.dir}"/>
+
+        <javac destdir="${build.dir}" source="${ant.java.version}"
+            target="${ant.java.version}">
+            <src path="${src.dir}"/>
+            <classpath refid="master-classpath"/>
+        </javac>
+    </target>
+
+    <!-- Clean all .class files recursively in ${build.dir} -->
+    <target name="clean" description="Clean output directories">
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- Print out the Java version that ANT is using -->
+    <target name="print-version">
+       <echo>Java/JVM version: ${ant.java.version}</echo>
+       <echo>Java/JVM detail version: ${java.version}</echo>
+    </target>
+</project>

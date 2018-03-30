@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<project name="Printing java version" default="print-version">
+    <target name="print-version">
+       <echo>Java/JVM version: ${ant.java.version}</echo>
+       <echo>Java/JVM detail version: ${java.version}</echo>
+    </target>
+</project>
